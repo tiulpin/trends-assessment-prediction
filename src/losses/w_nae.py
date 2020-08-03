@@ -13,8 +13,6 @@ class WNAELoss(nn.Module):
         self.w = torch.FloatTensor(w).cuda()
 
     def forward(self, output, target):
-        return torch.sum(
-            self.w
-            * torch.sum(torch.abs(target - output), axis=0)
-            / torch.sum(target, axis=0)
-        )
+        return torch.sum(self.w *
+                         torch.sum(torch.abs(target - output), axis=0) /
+                         torch.sum(target, axis=0))

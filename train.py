@@ -19,7 +19,10 @@ def main(hparams):
 
     model = CoolSystem(hparams=hparams)
     trainer = Trainer.from_argparse_args(hparams)
-    trainer.logger = loggers.TensorBoardLogger(f"logs/", name=experiment_name,)
+    trainer.logger = loggers.TensorBoardLogger(
+        f"logs/",
+        name=experiment_name,
+    )
 
     trainer.fit(model)
 
@@ -41,7 +44,8 @@ if __name__ == "__main__":
         default="../input/trends-assessment-prediction/np_train/",
         type=str,
     )
-    parser.add_argument("--root_path", default="../input/trends-assessment-prediction")
+    parser.add_argument("--root_path",
+                        default="../input/trends-assessment-prediction")
 
     parser.add_argument("--profiler", default=False, type=bool)
     parser.add_argument("--fast_dev_run", default=False, type=bool)

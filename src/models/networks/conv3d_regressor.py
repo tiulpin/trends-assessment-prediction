@@ -11,9 +11,10 @@ from src.models.layers.res_block import ResBlock
 class Conv3DRegressor(nn.Module):
     def __init__(self, n_classes: int = 5):
         super(Conv3DRegressor, self).__init__()
-        self.conv1 = nn.Conv3d(
-            in_channels=53, out_channels=128, kernel_size=(3, 3, 3), padding=2
-        )
+        self.conv1 = nn.Conv3d(in_channels=53,
+                               out_channels=128,
+                               kernel_size=(3, 3, 3),
+                               padding=2)
         self.bn1 = nn.BatchNorm3d(num_features=128)
         self.m_pool1 = nn.MaxPool3d(kernel_size=(2, 2, 2), stride=2)
         self.res_conv1 = ResBlock()

@@ -1,7 +1,6 @@
 # coding: utf-8
 __author__ = "tiulpin: https://kaggle.com/tiulpin"
 
-
 import pytorch_lightning as pl
 import torch
 from torch import nn
@@ -34,7 +33,9 @@ class CoolSystem(pl.LightningModule):
 
         return {
             "loss": loss,
-            "log": {f"train/{self.hparams.criterion}": loss},
+            "log": {
+                f"train/{self.hparams.criterion}": loss
+            },
         }
 
     def validation_step(self, batch, batch_idx: int) -> dict:
@@ -47,7 +48,9 @@ class CoolSystem(pl.LightningModule):
 
         return {
             "val_loss": avg_loss,
-            "log": {f"val/avg_{self.hparams.criterion}": avg_loss},
+            "log": {
+                f"val/avg_{self.hparams.criterion}": avg_loss
+            },
         }
 
     def configure_optimizers(self):
@@ -58,10 +61,7 @@ class CoolSystem(pl.LightningModule):
 
     def train_dataloader(self) -> torch.utils.data.DataLoader:
         return DataLoader(
-            TrendsNpSet(
-                mode="train",
-                config=self.hparams
-            ),
+            TrendsNpSet(mode="train", config=self.hparams),
             batch_size=self.batch_size,
             num_workers=self.hparams.num_workers,
             pin_memory=True,
@@ -96,9 +96,11 @@ class CoolSystem(pl.LightningModule):
 
     def get_optimizer(self) -> object:
         if "adam" == self.hparams.optimizer:
-            return torch.optim.Adam(self.net.parameters(), lr=self.learning_rate)
+            return torch.optim.Adam(self.net.parameters(),
+                                    lr=self.learning_rate)
         elif "adamw" == self.hparams.optimizer:
-            return torch.optim.AdamW(self.net.parameters(), lr=self.learning_rate)
+            return torch.optim.AdamW(self.net.parameters(),
+                                     lr=self.learning_rate)
         elif "sgd" == self.hparams.optimizer:
             return torch.optim.SGD(
                 self.net.parameters(),
