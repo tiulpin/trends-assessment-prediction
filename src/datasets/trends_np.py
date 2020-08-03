@@ -37,8 +37,10 @@ class TrendsNpSet(Dataset):
     def __len__(self) -> int:
         return len(self.filenames)
 
-    def __getitem__(self, index: int) -> Union[Tuple[torch.tensor], torch.tensor]:
-        t = torch.FloatTensor(np.load(f"{self.root}/{self.filenames[index]}.npy"))
+    def __getitem__(self,
+                    index: int) -> Union[Tuple[torch.tensor], torch.tensor]:
+        t = torch.FloatTensor(
+            np.load(f"{self.root}/{self.filenames[index]}.npy"))
         if self.permutation:
             t = t.permute(3, 0, 1, 2)
 

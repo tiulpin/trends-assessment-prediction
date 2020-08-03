@@ -16,7 +16,8 @@ def main():
 
     for index in range(len(filenames)):
         with hp.File(f"{HP_ROOT}/{filenames[index]}.mat") as file:
-            np.save(f"{NP_ROOT}/{filenames[index]}.npy", file["SM_feature"][()])
+            np.save(f"{NP_ROOT}/{filenames[index]}.npy",
+                    file["SM_feature"][()])
 
 
 if __name__ == "__main__":
