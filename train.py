@@ -19,7 +19,7 @@ def main(hparams):
 
     model = CoolSystem(hparams=hparams)
     trainer = Trainer.from_argparse_args(hparams)
-    trainer.logger = loggers.TensorBoardLogger(f"logs/", name=experiment_name,)
+    trainer.logger = loggers.TensorBoardLogger("logs/", name=experiment_name,)
 
     trainer.fit(model)
 
